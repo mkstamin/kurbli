@@ -1,12 +1,12 @@
-import { Navbar } from "./UI/navbar";
-import { Right } from "./pages/right";
-import { LeftText } from "./pages/left";
-import { ScoreBadge } from "./UI/score_badge";
 import { useState } from "react";
 import { useKurbilScore } from "./components/kurbilScore";
+import { LeftText } from "./pages/left";
+import { Right } from "./pages/right";
+import { Navbar } from "./UI/navbar";
+import { ScoreBadge } from "./UI/score_badge";
 
 function App() {
-  const [scoreBadgeVisible, setScoreBadgeVisible] = useState(false);
+  const [scoreBadgeVisible, setScoreBadgeVisible] = useState(true);
   const { kurbilScore, setKurbilScore } = useKurbilScore();
 
   const toggleScoreBadge = () => {
@@ -27,11 +27,11 @@ function App() {
           />
           <Right />
         </div>
-        {scoreBadgeVisible && (
-          <div className="flex items-center justify-center absolute top-0 w-full h-full z-50">
-            <ScoreBadge handleClose={hideScoreBadge} score={kurbilScore} />
-          </div>
-        )}
+        {/* {scoreBadgeVisible && ( */}
+        <div className="flex items-center justify-center absolute top-0 w-full h-full z-50">
+          <ScoreBadge handleClose={hideScoreBadge} score={kurbilScore} />
+        </div>
+        {/* )} */}
       </div>
     </>
   );

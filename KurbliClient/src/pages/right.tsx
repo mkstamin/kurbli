@@ -1,19 +1,22 @@
 export function Right() {
   return (
-    <div className="bg-black">
+    <div className="bg-[#18180B]">
       <div className="bg-white">
         <img className="" src="/home.png" height="600px" width="1200px" />
       </div>
 
-      <div className="text-2xl font-semibold text-gray-300 m-2 p-2">
-        What is Krubli's real-time scoring system?
+      <div className="mx-6 my-14">
+        <h2 className="text-[40px] leading-[54px] text-white">
+          How does kurbli work?
+        </h2>
+
+        <p className="text-2xl text-white mt-10">
+          kurbli uses a proprietary combination of artificial intelligence and
+          predictive analytics to determine how investible your property may be
+          to potential investors.
+        </p>
       </div>
-      <div className="text-gray-300 m-2 p-2">
-        Krubli's real-time scoring system is a tool designed for homeowners to
-        assess how applealing their property is to potenial investors based on
-        various factors
-      </div>
-      <div className="text-2xl font-semibold text-gray-300 m-2 p-2">
+      {/* <div className="text-2xl font-semibold text-gray-300 m-2 p-2">
         What we provide
       </div>
       <div className="flex p-2 m-2">
@@ -33,7 +36,7 @@ export function Right() {
           <img src="dollar.svg" width="56px" height="56px" />
           <div className="m-1">Negotiating on your behalf</div>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 }

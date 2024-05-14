@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { Score } from "../components/score";
-import { Checkbox } from "./checkbox";
 import { MoonLoader } from "react-spinners";
+import { Score } from "../components/score";
 import { Suggestion } from "../components/suggestions";
+import { Checkbox } from "./checkbox";
 
 const backend_url = `https://1tuwbh5e46.execute-api.ap-southeast-2.amazonaws.com/test`;
 
@@ -42,7 +42,6 @@ export function Input({ toggleScoreBadge, fn, final_score }: any) {
     latitude: "",
   });
 
-
   const handleScoreBadgeClick = () => {
     toggleScoreBadge();
   };
@@ -72,58 +71,75 @@ export function Input({ toggleScoreBadge, fn, final_score }: any) {
   };
 
   useEffect(() => {
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  setIsEmail(emailRegex.test(email));
-}, [email]);
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    setIsEmail(emailRegex.test(email));
+  }, [email]);
 
-    useEffect(() => {
-  if (!geo_data.geo_id) return;
+  useEffect(() => {
+    if (!geo_data.geo_id) return;
 
-  const fetch_other_data = async () => {
-    setIsLoading(true);
-    try {
-      const urls = [
-        `${backend_url}/investibility/crime_score?geo_id=${geo_data.geo_id}`,
-        `${backend_url}/investibility/nsfr_score?latitude=${geo_data.latitude}&longitude=${geo_data.longitude}`,
-        `${backend_url}/investibility/rfsr_score?latitude=${geo_data.latitude}&longitude=${geo_data.longitude}`,
-        `${backend_url}/investibility/school_score?geo_id=${geo_data.geo_id}`
-      ];
-      const responses = await Promise.all(urls.map(url => fetch(url)));
-      const jsonResponses = await Promise.all(responses.map(res => res.json()));
+    const fetch_other_data = async () => {
+      setIsLoading(true);
+      try {
+        const urls = [
+          `${backend_url}/investibility/crime_score?geo_id=${geo_data.geo_id}`,
+          `${backend_url}/investibility/nsfr_score?latitude=${geo_data.latitude}&longitude=${geo_data.longitude}`,
+          `${backend_url}/investibility/rfsr_score?latitude=${geo_data.latitude}&longitude=${geo_data.longitude}`,
+          `${backend_url}/investibility/school_score?geo_id=${geo_data.geo_id}`,
+        ];
+        const responses = await Promise.all(urls.map((url) => fetch(url)));
+        const jsonResponses = await Promise.all(
+          responses.map((res) => res.json())
+        );
 
-      setCrime_score(jsonResponses[0].crime_score);
-      setNsfr_score(jsonResponses[1].n_sfr_score);
-      setRfsr_score(jsonResponses[2].r_sfr_score);
-      setSchool_score(jsonResponses[3].school_score);
-    } catch (error) {
-      alert("Error fetching data");
-      console.error(error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+        setCrime_score(jsonResponses[0].crime_score);
+        setNsfr_score(jsonResponses[1].n_sfr_score);
+        setRfsr_score(jsonResponses[2].r_sfr_score);
+        setSchool_score(jsonResponses[3].school_score);
+      } catch (error) {
+        alert("Error fetching data");
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
 
-  fetch_other_data();
-}, [geo_data.geo_id, backend_url, geo_data.latitude, geo_data.longitude]);
+    fetch_other_data();
+  }, [geo_data.geo_id, backend_url, geo_data.latitude, geo_data.longitude]);
 
-useEffect(() => {
-  if (!(nsfr_score && rfsr_score && crime_score && school_score)) return;
+  useEffect(() => {
+    if (!(nsfr_score && rfsr_score && crime_score && school_score)) return;
 
-  const fetch_kurbil_score = async () => {
-    try {
-      const url = `${backend_url}/investibility/?address=${encodeURIComponent(user_address.name)}&city=${user_address.city}&state=${user_address.state}&zip=${user_address.zip}&latitude=${geo_data.latitude}&longitude=${geo_data.longitude}&crime_rate=${crime_score}&school_rate=${school_score}&nsfr=${nsfr_score}&rsfr=${rfsr_score}&cap_rate=${cap_score}&email=${email}`;
-      const response = await fetch(url);
-      const krubil_json = await response.json();
-      fn(krubil_json.score);
-    } catch (error) {
-      console.error("Error fetching the kurbil score", error);
-      alert("Error fetching the kurbil score");
-    }
-  };
+    const fetch_kurbil_score = async () => {
+      try {
+        const url = `${backend_url}/investibility/?address=${encodeURIComponent(
+          user_address.name
+        )}&city=${user_address.city}&state=${user_address.state}&zip=${
+          user_address.zip
+        }&latitude=${geo_data.latitude}&longitude=${
+          geo_data.longitude
+        }&crime_rate=${crime_score}&school_rate=${school_score}&nsfr=${nsfr_score}&rsfr=${rfsr_score}&cap_rate=${cap_score}&email=${email}`;
+        const response = await fetch(url);
+        const krubil_json = await response.json();
+        fn(krubil_json.score);
+      } catch (error) {
+        console.error("Error fetching the kurbil score", error);
+        alert("Error fetching the kurbil score");
+      }
+    };
 
-  fetch_kurbil_score();
-}, [nsfr_score, rfsr_score, crime_score, school_score, backend_url, user_address, geo_data, cap_score, email]);
-
+    fetch_kurbil_score();
+  }, [
+    nsfr_score,
+    rfsr_score,
+    crime_score,
+    school_score,
+    backend_url,
+    user_address,
+    geo_data,
+    cap_score,
+    email,
+  ]);
 
   const btn_function = () => {
     if (isEmail && isChecked) {
@@ -138,7 +154,7 @@ useEffect(() => {
   };
 
   return (
-    <div className="py-10">
+    <div className="">
       <div className="flex">
         <div>
           <div className="flex relative">
