@@ -245,7 +245,7 @@ export function Input({
           </div>
           <button
             className={`hidden lg:block py-2 lg:py-0 px-6 mx-4 rounded-full bg-[#D9A831] font-bold cursor-pointer relative z-10 ${
-              valid_address ? "w-[35%]" : ""
+              valid_address ? "w-[60%] 2xl:w-[35%]" : ""
             }`}
             onClick={btn_function}
           >
@@ -283,11 +283,11 @@ export function Input({
       )}
       {score && !isloading && (
         <>
-          <div className="text-center my-5 lg:my-9">
-            <h2 className="text-2xl lg:text-4xl lg:leading-[71px] font-semibold text-[#18180B]">
+          <div className="text-center my-5">
+            <h2 className="text-2xl lg:text-4xl font-semibold text-[#18180B]">
               Congratulations!
             </h2>
-            <p className="text-lg lg:text-2xl text-[#18180B]">
+            <p className="text-base text-[#18180B]">
               Here's your kurbli score. Investors are looking for properties
               just like yours. <br className="hidden lg:block" />
               <a href="/" className="underline font-semibold">
@@ -297,7 +297,7 @@ export function Input({
             </p>
           </div>
           {/* <div className="flex flex-wrap justify-start mt-4"> */}
-          <div className="flex items-center justify-center mt-4">
+          <div className="flex items-center justify-center">
             <div
               className="py-2 lg:py-3 px-6 lg:px-8 mb-2 mr-2 bg-[#CFFFEB] flex items-center justify-center gap-2 rounded-full cursor-pointer"
               style={{ whiteSpace: "nowrap" }}
