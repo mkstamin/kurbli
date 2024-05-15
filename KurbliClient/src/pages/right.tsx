@@ -1,16 +1,21 @@
-export function Right() {
+export function Right({ valid_address, score }: any) {
   return (
-    <div className="bg-[#18180B]">
-      <div className="bg-white">
-        <img className="" src="/home.png" height="600px" width="1200px" />
+    <div className="flex flex-col bg-[#18180B]">
+      <div className="bg-white order-2 md:order-none">
+        <img
+          className=""
+          src={`${valid_address && !score ? "/valid.png" : "/home.png"}`}
+          height="600px"
+          width="1200px"
+        />
       </div>
 
-      <div className="mx-6 my-14">
-        <h2 className="text-[40px] leading-[54px] text-white">
+      <div className="mx-3 md:mx-6 my-4 md:my-10 order-1 md:order-none">
+        <h2 className="text-lg md:text-[40px] md:leading-[54px] text-white">
           How does kurbli work?
         </h2>
 
-        <p className="text-2xl text-white mt-10">
+        <p className="text-xs md:text-2xl text-white mt-3 md:mt-8">
           kurbli uses a proprietary combination of artificial intelligence and
           predictive analytics to determine how investible your property may be
           to potential investors.
